@@ -1,0 +1,40 @@
+{
+  "name": "express-js-mongo-starter-rest",
+  "version": "1.0.0",
+  "description": "Boilerplate project for bootstrapping development of Rest APIs with NodeJS, ExpressJS and MongoDb using Javascript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start-dev": "nodemon",
+    "lint": "eslint index.js src/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spinsage/express-js-mongo-starter-rest.git"
+  },
+  "keywords": [
+    "express",
+    "boilerplate",
+    "mongo",
+    "rest"
+  ],
+  "author": "spinsage",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/spinsage/express-js-mongo-starter-rest/issues"
+  },
+  "homepage": "https://github.com/spinsage/express-js-mongo-starter-rest#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "mongodb": "^4.2.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-standard": "^16.0.3",
+    "nodemon": "^2.0.15"
+  }
+}
