@@ -17,7 +17,7 @@ const PORT = process.env.SERVER_PORT || 3001;
 (async () => {
     try {
         await connectToServer();
-        app.listen(PORT, () => {
+        app.listen(PORT, '0.0.0.0', () => {
             console.log(`Server is running on port: ${PORT}`);
         });
     } catch (err) {
