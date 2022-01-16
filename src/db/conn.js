@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const logger = require('../utils/logger');
 
 let db;
 
@@ -16,9 +17,10 @@ const getDb = () => {
 }
 
 const connectToServer = async () => {
+    logger.info('Connecting to database...');
     const dbConn = await client.connect();
     db = dbConn.db('contactsDb');
-    console.log('Connected to DB');
+    logger.info('Database Connection successful');
 }
 
 module.exports = {
