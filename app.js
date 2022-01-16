@@ -8,14 +8,16 @@ const { connectToServer } = require('./src/db/conn');
 
 const app = express();
 const appRoutes = require('./src/routes');
+const errorHandler = require('./src/middlewares/errorHandler');
+
+app.disable('x-powered-by');
 
 app.use(express.json());
 app.use(morgan('combined'));
 app.use(cors());
 app.use(helmet());
-app.use('/', appRoutes);
-
-app.disable('x-powered-by');
+app.use(appRoutes);
+app.use(errorHandler);
 
 const PORT = process.env.SERVER_PORT || 3001;
 

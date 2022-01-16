@@ -2,8 +2,15 @@ const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const { getDb } = require('../db/conn');
 const logger = require('../utils/logger');
+const validate = require('../middlewares/validate');
+const {
+    createContact,
+    updateContact,
+    deleteContact,
+    getContact
+} = require('../validations/contactsValidation');
 
-router.get("/:id", async (request, response) => {
+router.get("/:id", validate(getContact), async (request, response) => {
 
     logger.info(`Processing request : ${request.method} ${request.url}`);
 
@@ -18,7 +25,7 @@ router.get("/:id", async (request, response) => {
     }
 });
 
-router.post("/", async (request, response) => {
+router.post("/", validate(createContact), async (request, response) => {
 
     logger.info(`Processing request : ${request.method} ${request.url}`);
 
@@ -33,7 +40,7 @@ router.post("/", async (request, response) => {
     return response.json(createdContact);
 });
 
-router.put("/:id", async (request, response) => {
+router.put("/:id", validate(updateContact), async (request, response) => {
 
     logger.info(`Processing request : ${request.method} ${request.url}`);
 
@@ -41,14 +48,14 @@ router.put("/:id", async (request, response) => {
         uid: request.params.id
     }, { $set: request.body });
 
-    if (updatedContact.modifiedCount === 1) {
+    if (updatedContact.matchedCount === 1) {
         return response.status(200).send();
     } else {
         return response.status(400).send();
     }
 });
 
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", validate(deleteContact), async (request, response) => {
 
     logger.info(`Processing request : ${request.method} ${request.url}`);
 
