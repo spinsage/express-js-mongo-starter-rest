@@ -1,10 +1,14 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { getDb } = require('../db/conn');
+const logger = require('../utils/logger');
 
 const router = express.Router();
 
 router.get("/contacts/:id", async (request, response) => {
+
+    logger.info(`Processing request : ${request.method} ${request.url}`);
+
     const contact = await getDb().collection('contacts').findOne({
         uid: request.params.id
     }, { projection: { _id: 0 } });
@@ -17,6 +21,9 @@ router.get("/contacts/:id", async (request, response) => {
 });
 
 router.post("/contacts", async (request, response) => {
+
+    logger.info(`Processing request : ${request.method} ${request.url}`);
+
     request.body.uid = uuidv4().replace(/-/g, '');
     const insertResponse = await getDb().collection('contacts').insertOne(
         request.body
@@ -29,6 +36,9 @@ router.post("/contacts", async (request, response) => {
 });
 
 router.put("/contacts/:id", async (request, response) => {
+
+    logger.info(`Processing request : ${request.method} ${request.url}`);
+
     const updatedContact = await getDb().collection('contacts').updateOne({
         uid: request.params.id
     }, { $set: request.body });
@@ -41,6 +51,9 @@ router.put("/contacts/:id", async (request, response) => {
 });
 
 router.delete("/contacts/:id", async (request, response) => {
+
+    logger.info(`Processing request : ${request.method} ${request.url}`);
+
     const deletedContact = await getDb().collection('contacts').deleteOne({
         uid: request.params.id
     });
